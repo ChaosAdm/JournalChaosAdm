@@ -30,8 +30,8 @@ class Diary:
 
     def check_entry_existence(self):
         try: 
-            self.entry = open(f'{self.filepath}')
-        except FileNotFoundError:
+            self.entry = open(self.filepath)
+        except:
             return False
         else:
             self.entry.close()
@@ -40,17 +40,17 @@ class Diary:
     def __init__(self, date, month):
         self.date = date
         self.month = month
-        self.filepath = f"C:\\Users\\lakshya\\Documents\\My_Workspace\\Milestone Projects\\Final Capstone Projects\\Journal_Entries\\{self.date}{self.month}"
+        self.filepath = f"C:/Users/lakshya/Documents/My_Workspace/Milestone Projects/Final Capstone Projects/Journal_Entries/{self.month}{self.date}"
     
     def add_entry(self):
-        self.entry = open(f"{self.filepath}", 'w')
+        self.entry = open(self.filepath, 'w')
         paragraph = multilines()
         
-        self.entry.write(f'{paragraph}') 
+        self.entry.write(paragraph) 
         self.entry.close()
     
     def read_entry(self):
-        self.entry = open(f'{self.filepath}','r+')
+        self.entry = open(self.filepath,'r+')
         self.entry.seek(0)
         
         for line in self.entry:
@@ -60,12 +60,12 @@ class Diary:
         paragraph = multilines()
         self.entry.seek(2)
         self.entry.write('\n') 
-        self.entry.write(f'{paragraph}')
+        self.entry.write(paragraph)
     
     def remove_entry(self):
-        if os.path.exists(f"{self.filepath}"):
+        if os.path.exists(self.filepath):
             self.entry.close()
-            os.remove(f"{self.filepath}")
+            os.remove(self.filepath)
         else:
             print('Entry does not exist!')
 
@@ -84,7 +84,7 @@ if __name__ == '__main__':
         while (option!='Add' and option!='Edit' and option!='Read' and option!='Delete' and option!='Exit'):
             print('Please choose from one of the 5 operations available to this program!')
             option = input('> ')
-        page = Diary(current.date,current.month) 
+        page = Diary(str(current.date),str(current.month)) 
 
         if option == 'Add': 
             if page.check_entry_existence() == True: 
@@ -107,4 +107,4 @@ if __name__ == '__main__':
             page.remove_entry() 
         if option == 'Exit': 
             break 
-        
+            
