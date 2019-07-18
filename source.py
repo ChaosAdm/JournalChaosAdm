@@ -5,11 +5,7 @@ Things it can do:
 
 $ Allow users to create/delete journal entries referenced by the date.
 $ Allow users to edit a particular day's entries referenced by the date 
-$ Makes files that are categorized under folders on the basis of months ( Jan, Feb etc)
-
-To be updated with: 
-
-$ Allowing Multiple Users to maintain their personal journals accessed by username and password
+$ Makes files that are categorized under folders on the basis of months ( Jan, Feb etc) 
  
 '''
 
@@ -84,9 +80,11 @@ if __name__ == '__main__':
     print('\t5: Exit')  
     
     while(True):
-        option = input('> ')
+        option = ''
+        while (option!='Add' and option!='Edit' and option!='Read' and option!='Delete' and option!='Exit'):
+            print('Please choose from one of the 5 operations available to this program!')
+            option = input('> ')
         page = Diary(current.date,current.month) 
-        
 
         if option == 'Add': 
             if page.check_entry_existence() == True: 
