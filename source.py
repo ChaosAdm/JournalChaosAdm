@@ -84,7 +84,7 @@ if __name__ == '__main__':
         while (option!='Add' and option!='Edit' and option!='Read' and option!='Delete' and option!='Exit'):
             print('Please choose from one of the 5 operations available to this program!')
             option = input('> ')
-        page = Diary(str(current.date),str(current.month)) 
+        page = Diary(str(current.day),str(current.month)) 
 
         if option == 'Add': 
             if page.check_entry_existence() == True: 
