@@ -15,9 +15,9 @@ current =   datetime.datetime.now()
 
 def multilines():
     buffer = [] 
+    print('Starting inputting your journal entry!') 
+    print('When you are done, simply write \".\" in the next immediate line') 
     while True:
-        print('Starting inputting your journal entry!') 
-        print('When you are done, simply write \".\" in the next immediate line') 
         print("> ",end="") 
         line = input() 
         if line == ".":
@@ -50,22 +50,24 @@ class Diary:
         self.entry.close()
     
     def read_entry(self):
-        self.entry = open(self.filepath,'r+')
+        self.entry = open(self.filepath)
         self.entry.seek(0)
         
         for line in self.entry:
             print(line)
     
+        self.entry.close()
     def edit_entry(self):
+        self.entry = open(self.filepath,'a+')
         paragraph = multilines()
-        self.entry.seek(2)
         self.entry.write('\n') 
         self.entry.write(paragraph)
+        self.entry.close()
     
     def remove_entry(self):
         if os.path.exists(self.filepath):
-            self.entry.close()
             os.remove(self.filepath)
+            print("Deleted today's entry!")
         else:
             print('Entry does not exist!')
 
@@ -81,30 +83,29 @@ if __name__ == '__main__':
     
     while(True):
         option = ''
-        while (option!='Add' and option!='Edit' and option!='Read' and option!='Delete' and option!='Exit'):
+        while (option.lower()!='add' and option.lower()!='edit' and option.lower()!='read' and option.lower()!='delete' and option.lower()!='exit'):
             print('Please choose from one of the 5 operations available to this program!')
             option = input('> ')
         page = Diary(str(current.day),str(current.month)) 
 
-        if option == 'Add': 
+        if option.lower() == 'add': 
             if page.check_entry_existence() == True: 
                 print('The journal entry for today has already been made! Try editing/reading instead!')
             else:
                 page.add_entry() 
-        if option == 'Edit': 
+        if option.lower() == 'edit': 
             if page.check_entry_existence() == True: 
                 page.edit_entry() 
             else:
                 print('No entry has been created today to edit!')
 
-        if option == 'Read': 
+        if option.lower() == 'read': 
             if page.check_entry_existence() == True:
                 page.read_entry()
             else:
                 print('No entry has been made to read!')
 
-        if option == 'Delete':
+        if option.lower() == 'delete':
             page.remove_entry() 
-        if option == 'Exit': 
-            break 
-            
+        if option.lower() == 'exit': 
+            break
