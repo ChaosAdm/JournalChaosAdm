@@ -11,12 +11,13 @@ $ Makes files that are categorized under folders on the basis of months ( Jan, F
 
 import datetime 
 import os
+
 current =   datetime.datetime.now() 
 
 def multilines():
-    buffer = [] 
+    buffer = []
     print('Starting inputting your journal entry!') 
-    print('When you are done, simply write \".\" in the next immediate line') 
+    print('When you are done, simply press type \".\" in the next immediate line') 
     while True:
         print("> ",end="") 
         line = input() 
@@ -40,7 +41,7 @@ class Diary:
     def __init__(self, date, month):
         self.date = date
         self.month = month
-        self.filepath = f"C:/Users/lakshya/Documents/My_Workspace/Milestone Projects/Final Capstone Projects/Journal_Entries/{self.month}{self.date}"
+        self.filepath = f"C:/Users/lakshya/Documents/My_Workspace/Milestone Projects/Final Capstone Projects/Journal_Entries/{datetime.date.today()}"
     
     def add_entry(self):
         self.entry = open(self.filepath, 'w')
